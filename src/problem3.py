@@ -3,8 +3,8 @@ PRACTICE Exam 1, problem 3.
 
 Authors: David Mutchler, Vibha Alangar, Matt Boutell, Dave Fisher,
          Valerie Galluzzi, Mark Hays, Amanda Stouder, Aaron Wilkin,
-         their colleagues, and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues, and George Bulger.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import rosegraphics as rg
 
@@ -38,7 +38,7 @@ def main():
 def run_test_problem3a():
     """ Tests the   problem3a   function. """
     # -------------------------------------------------------------------------
-    # TODO: 2. Implement this TEST function.
+    # DONE: 2. Implement this TEST function.
     #   It TESTS the  problem1a  function defined below.
     #   Include at least **   5   ** tests (we wrote four for you).
     # -------------------------------------------------------------------------
@@ -106,6 +106,29 @@ def run_test_problem3a():
 
 
 def problem3a(window, point, n):
+    p1 = point
+    p2 = rg.Point(p1.x, p1.y + 50)
+    line = rg.Line(p1, p2)
+    line.thickness = 1
+    w = 1
+    line.attach_to(window)
+    total = 1
+    for k in range(n-1):
+        p1.x = p1.x + 20
+        p1.y = p1.y + 10
+        p2.x = p1.x
+        p2.y = p1.y + 50
+        w = w + 2
+        if w > 13:
+            w = 13
+        line = rg.Line(p1, p2)
+        line.thickness = w
+        line.attach_to(window)
+        total = total + w
+
+    window.render()
+    return total
+
     """
     See   problem3a_picture.pdf   in this project for pictures
     that may help you better understand the following specification:
@@ -138,7 +161,7 @@ def problem3a(window, point, n):
         :type n:      int
     """
     # -------------------------------------------------------------------------
-    # TODO: 3. Implement and test this function.
+    # DONE: 3. Implement and test this function.
     #   Note that you should write its TEST function first (above).
     # -------------------------------------------------------------------------
     # -------------------------------------------------------------------------
@@ -166,6 +189,20 @@ def run_test_problem3b():
 
 
 def problem3b(m, point1):
+    window = rg.RoseWindow(400, 650)
+    window.render()
+    total = 0
+    n = 3
+    p1 = rg.Point(point1.x, point1.y)
+    for k in range(1, m +1):
+        total = problem3a(window, p1, n) + total
+        p1.y = point1.y + 60*k
+        p1.x = point1.x
+        n = n + 2
+
+    window.close_on_mouse_click()
+    return total
+
     """
     See   problem3b_picture.pdf   in this project for pictures
     that may help you better understand the following specification:
@@ -202,7 +239,7 @@ def problem3b(m, point1):
         :type point1: rg.Point
     """
     # -------------------------------------------------------------------------
-    # TODO: 4. Implement and test this function.
+    # DONE: 4. Implement and test this function.
     #          Tests have been written for you (above).
     #
     ###########################################################################
